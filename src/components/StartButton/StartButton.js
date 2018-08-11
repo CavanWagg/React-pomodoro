@@ -1,13 +1,11 @@
-import React from 'react';
-
+import React from "react";
 
 class StartButton extends React.Component {
-  
-  render () {
+  render() {
     return (
       <div>
         <button>Start </button>
-        </div>
+      </div>
     );
   }
 }
