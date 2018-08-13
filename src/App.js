@@ -11,6 +11,12 @@ class App extends Component {
       seconds: "00",
       minutes: 5
     };
+    this.secondsRemaining;
+    this.intervalHandle;
+    this.increaseTime = this.increaseTime.bind(this);
+    this.decreaseTime = this.decreaseTime.bind(this);
+    this.startCountdown = this.startCountdown.bind(this);
+    this.tick = this.tick.bind(this);
   }
   // bind method to constructor
 
@@ -25,6 +31,36 @@ class App extends Component {
     this.setState({
       minutes: this.state.minutes - 1
     });
+  };
+
+  tick = () => {
+    const min = Math.floor(this.secondsRemaining / 60);
+    const sec = this.secondsRemaining - min * 60;
+
+    this.setState({
+      minutes: min,
+      seconds: sec
+    });
+
+    //display 0 to the left of the single digit second
+    if (sec < 10) {
+      this.setState({
+        seconds: "0" + this.state.seconds
+      });
+    }
+
+    if ((min === 0) & (sec === 0)) {
+      clearInterval(this.intervalHandle);
+    }
+
+    this.secondsRemaining--;
+  };
+
+  startCountdown = () => {
+    console.log("startCountdown!");
+    this.intervalHandle = setInterval(this.tick, 1000);
+    let time = this.state.minutes;
+    this.secondsRemaining = time * 60;
   };
 
   render() {
@@ -45,7 +81,7 @@ class App extends Component {
           increaseTime={this.increaseTime}
           decreaseTime={this.decreaseTime}
         />
-        <StartButton />
+        <StartButton startCountdown={this.startCountdown} />
       </div>
     );
   }
