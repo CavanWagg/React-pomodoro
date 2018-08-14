@@ -9,7 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       seconds: "00",
-      minutes: 5
+      minutes: 5,
+      timerRunning: false
     };
     this.secondsRemaining;
     this.intervalHandle;
@@ -49,6 +50,12 @@ class App extends Component {
       });
     }
 
+    if (min < 10) {
+      this.setState({
+        value: "0" + min
+      });
+    }
+
     if ((min === 0) & (sec === 0)) {
       clearInterval(this.intervalHandle);
     }
@@ -57,10 +64,20 @@ class App extends Component {
   };
 
   startCountdown = () => {
-    console.log("startCountdown!");
-    this.intervalHandle = setInterval(this.tick, 1000);
-    let time = this.state.minutes;
-    this.secondsRemaining = time * 60;
+    if (!this.state.timerRunning) {
+      console.log("startCountdown!");
+      this.intervalHandle = setInterval(this.tick, 1000);
+      let time = this.state.minutes;
+      this.secondsRemaining = time * 60;
+      this.setState({
+        timerRunning: !this.state.timerRunning
+      });
+    } else {
+      clearInterval(this.intervalHandle);
+      this.setState({
+        timerRunning: !this.state.timerRunning
+      });
+    }
   };
 
   render() {
@@ -81,7 +98,10 @@ class App extends Component {
           increaseTime={this.increaseTime}
           decreaseTime={this.decreaseTime}
         />
-        <StartButton startCountdown={this.startCountdown} />
+        <StartButton
+          buttonDisplay={this.state.buttonDisplay}
+          startCountdown={this.startCountdown}
+        />
       </div>
     );
   }
