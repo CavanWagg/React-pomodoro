@@ -65,10 +65,17 @@ class App extends Component {
 
   startCountdown = () => {
     if (!this.state.timerRunning) {
-      console.log("startCountdown!");
       this.intervalHandle = setInterval(this.tick, 1000);
       let time = this.state.minutes;
-      this.secondsRemaining = time * 60;
+      // For beginning state at "00"
+      if (this.state.seconds === "00") {
+        console.log("booyah!");
+        this.secondsRemaining = time * 60;
+        // All other cases
+      } else {
+        this.secondsRemaining = time * 60 + this.state.seconds;
+      }
+
       this.setState({
         timerRunning: !this.state.timerRunning
       });
