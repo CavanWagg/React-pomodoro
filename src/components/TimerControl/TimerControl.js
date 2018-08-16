@@ -5,14 +5,6 @@ class TimerControl extends React.Component {
     return (
       <div>
         <p>Adjust time</p>
-        <button onClick={this.props.increaseTime} className="increase-button">
-          {" "}
-          +{" "}
-        </button>
-        <button onClick={this.props.decreaseTime} className="decrease-button">
-          {" "}
-          -{" "}
-        </button>
       </div>
     );
   }

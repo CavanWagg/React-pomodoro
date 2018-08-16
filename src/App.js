@@ -1,36 +1,53 @@
 import React, { Component } from "react";
 import "./App.css";
 import Timer from "./components/Timer/Timer.js";
-import StartButton from "./components/StartButton/StartButton.js";
+import FocusButton from "./components/FocusButton/FocusButton.js";
 import TimerControl from "./components/TimerControl/TimerControl";
+import BreakButton from "./components/BreakButton/BreakButton";
+import StopButton from "./components/StopButton/StopButton";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       seconds: "00",
-      minutes: 5,
+      minutes: 0,
+      focus: 25,
+      break: 5,
       timerRunning: false
     };
     this.secondsRemaining;
     this.intervalHandle;
-    this.increaseTime = this.increaseTime.bind(this);
-    this.decreaseTime = this.decreaseTime.bind(this);
-    this.startCountdown = this.startCountdown.bind(this);
+    this.increaseFocus = this.increaseFocus.bind(this);
+    this.decreaseFocus = this.decreaseFocus.bind(this);
+    this.startFocus = this.startFocus.bind(this);
     this.tick = this.tick.bind(this);
   }
   // bind method to constructor
 
-  increaseTime = () => {
+  increaseFocus = () => {
     console.log("increase Time!");
     this.setState({
-      minutes: this.state.minutes + 1
+      focus: this.state.focus + 1
     });
   };
 
-  decreaseTime = () => {
+  decreaseFocus = () => {
     this.setState({
-      minutes: this.state.minutes - 1
+      focus: this.state.focus - 1
+    });
+  };
+
+  increaseBreak = () => {
+    console.log("increase Time!");
+    this.setState({
+      break: this.state.break + 1
+    });
+  };
+
+  decreaseBreak = () => {
+    this.setState({
+      break: this.state.break - 1
     });
   };
 
@@ -63,28 +80,31 @@ class App extends Component {
     this.secondsRemaining--;
   };
 
-  startCountdown = () => {
-    if (!this.state.timerRunning) {
-      this.intervalHandle = setInterval(this.tick, 1000);
-      let time = this.state.minutes;
-      // For beginning state at "00"
-      if (this.state.seconds === "00") {
-        console.log("booyah!");
-        this.secondsRemaining = time * 60;
-        // All other cases
-      } else {
-        this.secondsRemaining = time * 60 + this.state.seconds;
-      }
+  startFocus = () => {
+    clearInterval(this.intervalHandle);
+    this.intervalHandle = setInterval(this.tick, 1000);
+    let time = this.state.focus;
+    this.secondsRemaining = time * 60;
+    this.setState({
+      timerRunning: !this.state.timerRunning
+    });
+  };
 
-      this.setState({
-        timerRunning: !this.state.timerRunning
-      });
-    } else {
-      clearInterval(this.intervalHandle);
-      this.setState({
-        timerRunning: !this.state.timerRunning
-      });
-    }
+  startBreak = () => {
+    clearInterval(this.intervalHandle);
+    this.intervalHandle = setInterval(this.tick, 1000);
+    let time = this.state.break;
+    this.secondsRemaining = time * 60;
+    this.setState({
+      timerRunning: !this.state.timerRunning
+    });
+  };
+
+  stopTimer = () => {
+    clearInterval(this.intervalHandle);
+    this.setState({
+      timerRunning: !this.state.timerRunning
+    });
   };
 
   render() {
@@ -100,15 +120,21 @@ class App extends Component {
         </header>
 
         <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
-        <TimerControl
-          minutes={this.state.minutes}
-          increaseTime={this.increaseTime}
-          decreaseTime={this.decreaseTime}
-        />
-        <StartButton
+        <TimerControl minutes={this.state.minutes} />
+        <FocusButton
+          focus={this.state.focus}
           buttonDisplay={this.state.buttonDisplay}
-          startCountdown={this.startCountdown}
+          startFocus={this.startFocus}
+          increaseFocus={this.increaseFocus}
+          decreaseFocus={this.decreaseFocus}
         />
+        <BreakButton
+          break={this.state.break}
+          startBreak={this.startBreak}
+          increaseBreak={this.increaseBreak}
+          decreaseBreak={this.decreaseBreak}
+        />
+        <StopButton stopTimer={this.stopTimer} />
       </div>
     );
   }
