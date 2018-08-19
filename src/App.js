@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Sound from "react-sound";
 import "./App.css";
 import Timer from "./components/Timer/Timer.js";
 import FocusButton from "./components/FocusButton/FocusButton.js";
@@ -118,6 +119,7 @@ class App extends Component {
             </span>
           </h1>
         </header>
+        <Sound url="./audio/Alarm.mp3" playStatus={Sound.status.PLAYING} />
 
         <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
         <TimerControl minutes={this.state.minutes} />
