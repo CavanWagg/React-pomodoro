@@ -82,8 +82,11 @@ class App extends Component {
 
     if ((min === 0) & (sec === 0)) {
       console.log("0000000000");
+
+      let audio = new Audio("https://goo.gl/65cBl1");
+      audio.play();
+
       clearInterval(this.intervalHandle);
-      this.audioBeep.play();
     }
 
     this.secondsRemaining--;
@@ -127,14 +130,6 @@ class App extends Component {
             </span>
           </h1>
         </header>
-        <audio
-          preload="auto"
-          src="https://goo.gl/6NNLMG"
-          ref={audio => {
-            this.audioBeep = audio;
-          }}
-        />
-
         <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
         <TimerControl minutes={this.state.minutes} />
         <FocusButton
