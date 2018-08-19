@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Sound from "react-sound";
 import "./App.css";
 import Timer from "./components/Timer/Timer.js";
 import FocusButton from "./components/FocusButton/FocusButton.js";
@@ -27,29 +26,36 @@ class App extends Component {
   // bind method to constructor
 
   increaseFocus = () => {
-    console.log("increase Time!");
-    this.setState({
-      focus: this.state.focus + 1
-    });
+    if (this.state.focus <= 60) {
+      console.log("increase Time!");
+      this.setState({
+        focus: this.state.focus + 1
+      });
+    }
   };
 
   decreaseFocus = () => {
-    this.setState({
-      focus: this.state.focus - 1
-    });
+    if (this.state.focus > 10)
+      this.setState({
+        focus: this.state.focus - 1
+      });
   };
 
   increaseBreak = () => {
-    console.log("increase Time!");
-    this.setState({
-      break: this.state.break + 1
-    });
+    if (this.state.break <= 20) {
+      console.log("increase Time!");
+      this.setState({
+        break: this.state.break + 1
+      });
+    }
   };
 
   decreaseBreak = () => {
-    this.setState({
-      break: this.state.break - 1
-    });
+    if (this.state.break > 1) {
+      this.setState({
+        break: this.state.break - 1
+      });
+    }
   };
 
   tick = () => {
@@ -75,7 +81,9 @@ class App extends Component {
     }
 
     if ((min === 0) & (sec === 0)) {
+      console.log("0000000000");
       clearInterval(this.intervalHandle);
+      this.audioBeep.play();
     }
 
     this.secondsRemaining--;
@@ -119,7 +127,13 @@ class App extends Component {
             </span>
           </h1>
         </header>
-        <Sound url="./audio/Alarm.mp3" playStatus={Sound.status.PLAYING} />
+        <audio
+          preload="auto"
+          src="https://goo.gl/6NNLMG"
+          ref={audio => {
+            this.audioBeep = audio;
+          }}
+        />
 
         <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
         <TimerControl minutes={this.state.minutes} />
