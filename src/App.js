@@ -81,11 +81,8 @@ class App extends Component {
     }
 
     if ((min === 0) & (sec === 0)) {
-      console.log("0000000000");
-
       let audio = new Audio("https://goo.gl/65cBl1");
       audio.play();
-
       clearInterval(this.intervalHandle);
     }
 

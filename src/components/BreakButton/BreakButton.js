@@ -1,21 +1,30 @@
-import React from "react";
+import React, { Component } from "react";
+import { Button } from "react-bootstrap";
 
-class BreakButton extends React.Component {
+class BreakButton extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.increaseBreak} className="increase-button">
+        <Button
+          bsStyle="primary"
+          onClick={this.props.increaseBreak}
+          className="increase-button"
+        >
           {" "}
           +{" "}
-        </button>
-        <button onClick={this.props.startBreak}>
+        </Button>
+        <Button bsStyle="primary" onClick={this.props.startBreak}>
           Break {this.props.break}
-        </button>
+        </Button>
 
-        <button onClick={this.props.decreaseBreak} className="decrease-button">
+        <Button
+          bsStyle="primary"
+          onClick={this.props.decreaseBreak}
+          className="decrease-button"
+        >
           {" "}
           -{" "}
-        </button>
+        </Button>
       </div>
     );
   }
