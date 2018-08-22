@@ -1,11 +1,12 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 
 class stopButton extends React.Component {
   render() {
     return (
-      <div>
-        <button onClick={this.props.stopTimer}>Stop</button>
-      </div>
+      <Button bsSize="large" bsStyle="danger" onClick={this.props.stopTimer}>
+        Stop
+      </Button>
     );
   }
 }

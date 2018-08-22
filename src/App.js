@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import "./App.css";
 import Timer from "./components/Timer/Timer.js";
 import FocusButton from "./components/FocusButton/FocusButton.js";
-import TimerControl from "./components/TimerControl/TimerControl";
+// import TimerControl from "./components/TimerControl/TimerControl";
 import BreakButton from "./components/BreakButton/BreakButton";
 import StopButton from "./components/StopButton/StopButton";
+import Controls from "./components/Controls/Controls";
+import { Jumbotron, Button, Grid, Row, Col } from "react-bootstrap";
 
 class App extends Component {
   constructor(props) {
@@ -119,30 +121,53 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        <Jumbotron bsStyle="primary">
           <h1 className="App-title">
             Pomodoro!!!{" "}
             <span aria-label="Tomato" role="img">
               🍅{" "}
             </span>
           </h1>
-        </header>
-        <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
-        <TimerControl minutes={this.state.minutes} />
-        <FocusButton
-          focus={this.state.focus}
-          buttonDisplay={this.state.buttonDisplay}
-          startFocus={this.startFocus}
-          increaseFocus={this.increaseFocus}
-          decreaseFocus={this.decreaseFocus}
-        />
-        <BreakButton
-          break={this.state.break}
-          startBreak={this.startBreak}
-          increaseBreak={this.increaseBreak}
-          decreaseBreak={this.decreaseBreak}
-        />
-        <StopButton stopTimer={this.stopTimer} />
+        </Jumbotron>
+        <div className="main">
+          <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
+          <div>
+            <FocusButton startFocus={this.startFocus} />
+            <BreakButton startBreak={this.startBreak} />
+            <StopButton stopTimer={this.stopTimer} />
+          </div>
+        </div>
+
+        <footer className="footer navbar-fixed-bottom">
+          <Grid>
+            <Row>
+              <Col md={6} />
+              <Col md={6}>
+                <div>
+                  {/* <p> Focus </p>
+                  <p> Break </p> */}
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={6} />
+              <Col md={6}>
+                <Controls
+                  focus={this.state.focus}
+                  break={this.state.break}
+                  increaseBreak={this.increaseBreak}
+                  decreaseBreak={this.decreaseBreak}
+                  increaseFocus={this.increaseFocus}
+                  decreaseFocus={this.decreaseFocus}
+                />
+              </Col>
+            </Row>
+            <Row>
+              Designed & Coded by{" "}
+              <a href="https://github.com/CavanWagg">Cavan Wagg</a>{" "}
+            </Row>
+          </Grid>
+        </footer>
       </div>
     );
   }
