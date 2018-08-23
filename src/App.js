@@ -6,7 +6,7 @@ import FocusButton from "./components/FocusButton/FocusButton.js";
 import BreakButton from "./components/BreakButton/BreakButton";
 import StopButton from "./components/StopButton/StopButton";
 import Controls from "./components/Controls/Controls";
-import { Jumbotron, Button, Grid, Row, Col } from "react-bootstrap";
+import { Jumbotron, Grid, Row, Col } from "react-bootstrap";
 
 class App extends Component {
   constructor(props) {
@@ -20,45 +20,30 @@ class App extends Component {
     };
     this.secondsRemaining;
     this.intervalHandle;
-    this.increaseFocus = this.increaseFocus.bind(this);
-    this.decreaseFocus = this.decreaseFocus.bind(this);
+    this.changeFocusLength = this.changeFocusLength.bind(this);
+    this.changeBreakLength = this.changeBreakLength.bind(this);
+    this.lengthControl = this.lengthControl.bind(this);
     this.startFocus = this.startFocus.bind(this);
     this.tick = this.tick.bind(this);
   }
   // bind method to constructor
 
-  increaseFocus = () => {
-    if (this.state.focus <= 60) {
-      console.log("increase Time!");
-      this.setState({
-        focus: this.state.focus + 1
-      });
-    }
-  };
+  changeFocusLength(e) {
+    this.lengthControl("focus", e.currentTarget.value, this.state.focus);
+  }
+  changeBreakLength(e) {
+    this.lengthControl("break", e.currentTarget.value, this.state.break);
+  }
 
-  decreaseFocus = () => {
-    if (this.state.focus > 10)
-      this.setState({
-        focus: this.state.focus - 1
-      });
-  };
-
-  increaseBreak = () => {
-    if (this.state.break <= 20) {
-      console.log("increase Time!");
-      this.setState({
-        break: this.state.break + 1
-      });
+  lengthControl(stateToChange, sign, currentLength) {
+    console.log(stateToChange, currentLength);
+    if (sign === "-" && currentLength > 1) {
+      this.setState({ [stateToChange]: currentLength - 1 });
     }
-  };
-
-  decreaseBreak = () => {
-    if (this.state.break > 1) {
-      this.setState({
-        break: this.state.break - 1
-      });
+    if (sign === "+" && currentLength < 60) {
+      this.setState({ [stateToChange]: currentLength + 1 });
     }
-  };
+  }
 
   tick = () => {
     const min = Math.floor(this.secondsRemaining / 60);
@@ -143,23 +128,27 @@ class App extends Component {
             <Row>
               <Col md={6} />
               <Col md={6}>
-                <div>
-                  {/* <p> Focus </p>
-                  <p> Break </p> */}
+                <div className="duration-control">
+                  <div className="control-title" />
+                  <Controls
+                    title="Break Length"
+                    length={this.state.break}
+                    lengthControl={this.lengthControl}
+                    onClick={this.changeBreakLength}
+                    // focus={this.state.focus}
+                    // break={this.state.break}
+                    changeBreakLength={this.changeBreakLength}
+                  />
+                  <Controls
+                    title="Focus Length"
+                    length={this.state.focus}
+                    lengthControl={this.lengthControl}
+                    // break={this.state.break}
+                    // focus={this.state.focus}
+                    onClick={this.changeFocusLength}
+                    changeFocusLength={this.changeFocusLength}
+                  />
                 </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={6} />
-              <Col md={6}>
-                <Controls
-                  focus={this.state.focus}
-                  break={this.state.break}
-                  increaseBreak={this.increaseBreak}
-                  decreaseBreak={this.decreaseBreak}
-                  increaseFocus={this.increaseFocus}
-                  decreaseFocus={this.decreaseFocus}
-                />
               </Col>
             </Row>
             <Row>

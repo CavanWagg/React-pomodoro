@@ -6,43 +6,27 @@ class Controls extends React.Component {
   render() {
     return (
       <div className="controls-div">
-        {/* Focus */}
+        <div>{this.props.title}</div>
         <Button
           bsStyle="success"
-          onClick={this.props.increaseFocus}
+          onClick={this.props.onClick}
           className="increase-button"
+          value="+"
         >
           {" "}
           +{" "}
         </Button>
-        Focus {this.props.focus}
+        {this.props.length}
         <Button
           bsStyle="success"
-          onClick={this.props.decreaseFocus}
+          onClick={this.props.onClick}
           className="decrease-button"
+          value="-"
         >
           {" "}
           -{" "}
         </Button>
         {/* Short Break */}
-        <Button
-          bsStyle="success"
-          onClick={this.props.increaseBreak}
-          className="increase-button"
-        >
-          {" "}
-          +{" "}
-        </Button>
-        Break {this.props.break}
-        <Button
-          bsStyle="success"
-          onClick={this.props.decreaseBreak}
-          className="decrease-button"
-        >
-          {" "}
-          -{" "}
-        </Button>
-        {/* Long Break  */}
       </div>
     );
   }
