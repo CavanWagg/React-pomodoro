@@ -105,25 +105,22 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Jumbotron bsStyle="primary">
-          <h1 className="App-title">
-            Pomodoro!!!{" "}
+      <div id="App">
+        <div className="main">
+          <Timer minutes={this.state.minutes} seconds={this.state.seconds}>
+            {" "}
             <span aria-label="Tomato" role="img">
               🍅{" "}
-            </span>
-          </h1>
-        </Jumbotron>
-        <div className="main">
-          <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
-          <div>
+            </span>{" "}
+          </Timer>
+          <div className="text-center">
             <FocusButton startFocus={this.startFocus} />
             <BreakButton startBreak={this.startBreak} />
             <StopButton stopTimer={this.stopTimer} />
           </div>
         </div>
 
-        <footer className="footer navbar-fixed-bottom">
+        <footer className="footer text-center navbar-fixed-bottom">
           <Grid>
             <Row>
               <Col md={6} />

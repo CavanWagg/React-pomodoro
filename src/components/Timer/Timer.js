@@ -1,13 +1,15 @@
 import React from "react";
+import "./Timer.css";
+import { Grid } from "react-bootstrap";
 
 class Timer extends React.Component {
   render() {
     return (
-      <div>
-        <h1>
+      <Grid className="time-grid">
+        <h1 className="time">
           {this.props.minutes}:{this.props.seconds}
         </h1>
-      </div>
+      </Grid>
     );
   }
 }
