@@ -148,8 +148,16 @@ class App extends Component {
               </Col>
             </Row>
             <Row>
-              Designed & Coded by{" "}
-              <a href="https://github.com/CavanWagg">Cavan Wagg</a>{" "}
+              <p class="footer-text">
+                <span role="img" aria-label="rocket">
+                  🚀
+                </span>{" "}
+                Designed & Coded by
+                <a href="https://github.com/CavanWagg"> Cavan Wagg </a>
+                <span role="img" aria-label="nerd-face">
+                  🤓
+                </span>
+              </p>
             </Row>
           </Grid>
         </footer>
