@@ -13,7 +13,7 @@ class App extends Component {
     super(props);
     this.state = {
       seconds: "00",
-      minutes: 0,
+      minutes: 25,
       focus: 25,
       break: 5,
       timerRunning: false
@@ -135,16 +135,12 @@ class App extends Component {
                     length={this.state.break}
                     lengthControl={this.lengthControl}
                     onClick={this.changeBreakLength}
-                    // focus={this.state.focus}
-                    // break={this.state.break}
                     changeBreakLength={this.changeBreakLength}
                   />
                   <Controls
                     title="Focus Length"
                     length={this.state.focus}
                     lengthControl={this.lengthControl}
-                    // break={this.state.break}
-                    // focus={this.state.focus}
                     onClick={this.changeFocusLength}
                     changeFocusLength={this.changeFocusLength}
                   />
