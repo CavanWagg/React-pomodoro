@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 class FocusButton extends React.Component {
   render() {
     return (
-      <Button bsSize="large" onClick={this.props.startFocus}>
+      <Button bsStyle="primary" bsSize="large" onClick={this.props.startFocus}>
         Focus
       </Button>
     );

@@ -31,3 +31,9 @@ body,
 .control-title {
   display: block;
 }
+p.footer-text {
+  padding-top: 10px;
+}
+.button-div {
+  margin-bottom: 12rem;
+}

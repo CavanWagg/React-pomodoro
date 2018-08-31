@@ -6,7 +6,7 @@ import FocusButton from "./components/FocusButton/FocusButton.js";
 import BreakButton from "./components/BreakButton/BreakButton";
 import StopButton from "./components/StopButton/StopButton";
 import Controls from "./components/Controls/Controls";
-import { Jumbotron, Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col } from "react-bootstrap";
 
 class App extends Component {
   constructor(props) {
@@ -69,6 +69,7 @@ class App extends Component {
 
     if ((min === 0) & (sec === 0)) {
       let audio = new Audio("https://goo.gl/65cBl1");
+      let notification = new Notification("Time's up!");
       audio.play();
       clearInterval(this.intervalHandle);
     }
@@ -113,7 +114,7 @@ class App extends Component {
               🍅{" "}
             </span>{" "}
           </Timer>
-          <div className="text-center">
+          <div className="text-center button-div">
             <FocusButton startFocus={this.startFocus} />
             <BreakButton startBreak={this.startBreak} />
             <StopButton stopTimer={this.stopTimer} />
@@ -122,9 +123,9 @@ class App extends Component {
 
         <footer className="footer text-center navbar-fixed-bottom">
           <Grid>
-            <Row>
-              <Col md={6} />
-              <Col md={6}>
+            <Row className="bg-primary">
+              <Col md={8} />
+              <Col md={4}>
                 <div className="duration-control">
                   <div className="control-title" />
                   <Controls
@@ -144,13 +145,16 @@ class App extends Component {
                 </div>
               </Col>
             </Row>
-            <Row>
+            <Row className="bg-info">
               <p class="footer-text">
                 <span role="img" aria-label="rocket">
                   🚀
                 </span>{" "}
                 Designed & Coded by
-                <a href="https://github.com/CavanWagg"> Cavan Wagg </a>
+                <a class="font-primary" href="https://github.com/CavanWagg">
+                  {" "}
+                  Cavan Wagg{" "}
+                </a>
                 <span role="img" aria-label="nerd-face">
                   🤓
                 </span>
