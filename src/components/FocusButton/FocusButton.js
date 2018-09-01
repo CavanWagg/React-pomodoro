@@ -6,16 +6,8 @@ class FocusButton extends React.Component {
     return (
       <div className="text-center">
         <Button
-          bsStyle="primary hidden-xs"
+          bsStyle="primary"
           bsSize="large"
-          onClick={this.props.startFocus}
-        >
-          Focus
-        </Button>
-
-        <Button
-          bsSize="large"
-          bsStyle="primary visible-xs"
           onClick={this.props.startFocus}
         >
           Focus
