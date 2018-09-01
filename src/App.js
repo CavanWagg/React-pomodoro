@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import Timer from "./components/Timer/Timer.js";
 import FocusButton from "./components/FocusButton/FocusButton.js";
-// import TimerControl from "./components/TimerControl/TimerControl";
 import BreakButton from "./components/BreakButton/BreakButton";
 import StopButton from "./components/StopButton/StopButton";
 import Controls from "./components/Controls/Controls";
@@ -26,7 +25,32 @@ class App extends Component {
     this.startFocus = this.startFocus.bind(this);
     this.tick = this.tick.bind(this);
   }
-  // bind method to constructor
+
+  notifyMe() {
+    // Let's check if the browser supports notifications
+    if (!("Notification" in window)) {
+      alert("This browser does not support system notifications");
+    }
+
+    // Let's check whether notification permissions have already been granted
+    else if (Notification.permission === "granted") {
+      // If it's okay let's create a notification
+      var notification = new Notification("Hi there!");
+    }
+
+    // Otherwise, we need to ask the user for permission
+    else if (Notification.permission !== "denied") {
+      Notification.requestPermission(function(permission) {
+        // If the user accepts, let's create a notification
+        if (permission === "granted") {
+          var notification = new Notification("Hi there!");
+        }
+      });
+    }
+
+    // Finally, if the user has denied notifications and you
+    // want to be respectful there is no need to bother them any more.
+  }
 
   changeFocusLength(e) {
     this.lengthControl("focus", e.currentTarget.value, this.state.focus);
@@ -69,7 +93,8 @@ class App extends Component {
 
     if ((min === 0) & (sec === 0)) {
       let audio = new Audio("https://goo.gl/65cBl1");
-      let notification = new Notification("Time's up!");
+      let notificationTitle = "Time's up";
+
       audio.play();
       clearInterval(this.intervalHandle);
     }
@@ -124,7 +149,26 @@ class App extends Component {
         <footer className="footer text-center navbar-fixed-bottom">
           <Grid>
             <Row className="bg-primary">
-              <Col md={8} />
+              <Col md={8}>
+                <div className="checkbox-group">
+                  <div className="custom-control custom-radio">
+                    <input
+                      type="radio"
+                      className="custom-control-input"
+                      id="notificaiton"
+                    />
+                    <label htmlFor="notification">Notification</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input
+                      type="radio"
+                      className="custom-control-input"
+                      id="alarmSound"
+                    />
+                    <label htmlFor="alarmSound">Sound</label>
+                  </div>
+                </div>
+              </Col>
               <Col md={4}>
                 <div className="duration-control">
                   <div className="control-title" />
