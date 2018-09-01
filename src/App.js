@@ -26,30 +26,8 @@ class App extends Component {
     this.tick = this.tick.bind(this);
   }
 
-  notifyMe() {
-    // Let's check if the browser supports notifications
-    if (!("Notification" in window)) {
-      alert("This browser does not support system notifications");
-    }
-
-    // Let's check whether notification permissions have already been granted
-    else if (Notification.permission === "granted") {
-      // If it's okay let's create a notification
-      var notification = new Notification("Hi there!");
-    }
-
-    // Otherwise, we need to ask the user for permission
-    else if (Notification.permission !== "denied") {
-      Notification.requestPermission(function(permission) {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          var notification = new Notification("Hi there!");
-        }
-      });
-    }
-
-    // Finally, if the user has denied notifications and you
-    // want to be respectful there is no need to bother them any more.
+  Notify() {
+    Notification.requestPermission();
   }
 
   changeFocusLength(e) {
@@ -61,7 +39,7 @@ class App extends Component {
 
   lengthControl(stateToChange, sign, currentLength) {
     console.log(stateToChange, currentLength);
-    if (sign === "-" && currentLength > 1) {
+    if (sign === "—" && currentLength > 1) {
       this.setState({ [stateToChange]: currentLength - 1 });
     }
     if (sign === "+" && currentLength < 60) {
@@ -91,11 +69,22 @@ class App extends Component {
       });
     }
 
-    if ((min === 0) & (sec === 0)) {
+    if (
+      (min === 0) &
+      (sec === 0) &
+      (document.getElementById("alarmSound").checked == true)
+    ) {
       let audio = new Audio("https://goo.gl/65cBl1");
-      let notificationTitle = "Time's up";
-
       audio.play();
+      clearInterval(this.intervalHandle);
+    } else if (
+      (min === 0) &
+      (sec === 0) &
+      (document.getElementById("notification").checked == true)
+    ) {
+      new Notification("Time's up!");
+      clearInterval(this.intervalHandle);
+    } else if ((min === 0) & (sec === 0)) {
       clearInterval(this.intervalHandle);
     }
 
@@ -131,7 +120,7 @@ class App extends Component {
 
   render() {
     return (
-      <div id="App">
+      <div className="container-fluid" id="App">
         <div className="main">
           <Timer minutes={this.state.minutes} seconds={this.state.seconds}>
             {" "}
@@ -139,7 +128,7 @@ class App extends Component {
               🍅{" "}
             </span>{" "}
           </Timer>
-          <div className="text-center button-div">
+          <div className="button-div text-center">
             <FocusButton startFocus={this.startFocus} />
             <BreakButton startBreak={this.startBreak} />
             <StopButton stopTimer={this.stopTimer} />
@@ -147,21 +136,22 @@ class App extends Component {
         </div>
 
         <footer className="footer text-center navbar-fixed-bottom">
-          <Grid>
+          <Grid fluid={true}>
             <Row className="bg-primary">
               <Col md={8}>
                 <div className="checkbox-group">
-                  <div className="custom-control custom-radio">
+                  <div className="custom-control custom-checkbox">
                     <input
-                      type="radio"
+                      type="checkbox"
                       className="custom-control-input"
-                      id="notificaiton"
+                      id="notification"
+                      onClick={this.Notify}
                     />
                     <label htmlFor="notification">Notification</label>
                   </div>
-                  <div class="custom-control custom-radio">
+                  <div class="custom-control custom-checkbox">
                     <input
-                      type="radio"
+                      type="checkbox"
                       className="custom-control-input"
                       id="alarmSound"
                     />

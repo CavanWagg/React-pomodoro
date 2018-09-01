@@ -21,7 +21,7 @@ class Controls extends React.Component {
           bsStyle="success"
           onClick={this.props.onClick}
           className="decrease-button"
-          value="-"
+          value="—"
         >
           {" "}
           -{" "}
