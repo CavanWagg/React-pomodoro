@@ -5,3 +5,7 @@
 .controls-div {
   float: right;
 }
+.increase-button,
+.decrease-button {
+  width: 35px;
+}

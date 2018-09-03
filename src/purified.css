@@ -1,11 +1,11 @@
-html,
-body,
-#App {
+html,body,#App {
   height: 100%;
 }
+
 body {
   font-size: 18px;
 }
+
 .main {
   height: 100%;
   display: flex;
@@ -13,45 +13,34 @@ body {
   justify-content: center;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
 .App-title {
   font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
 }
 
 .duration-control {
   display: inline-block;
 }
+
 .control-title {
   display: block;
 }
+
 p.footer-text {
   padding-top: 10px;
 }
+
 .button-div {
   margin-bottom: 13rem;
   display: inline-flex;
   justify-content: center;
 }
-.custom-control,
-.custom-checkbox {
+
+.custom-control,.custom-checkbox {
   display: inline-flex;
   justify-content: center;
   margin: 20px;
 }
-.increase-button,
-.decrease-button {
-  width: 35px;
-}
+
 .custom-control-input {
   width: 20px;
   height: 15px;
@@ -61,6 +50,7 @@ p.footer-text {
   body {
     font-size: 14px;
   }
+
   .button-div {
     margin-bottom: 20rem;
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./purified.css";
 import Timer from "./components/Timer/Timer.js";
 import FocusButton from "./components/FocusButton/FocusButton.js";
 import BreakButton from "./components/BreakButton/BreakButton";
@@ -154,7 +154,7 @@ class App extends Component {
         <footer className="footer text-center navbar-fixed-bottom">
           <Grid fluid={true}>
             <Row className="bg-primary">
-              <Col md={8}>
+              <Col md={6} sm={6}>
                 <div className="checkbox-group">
                   <div className="custom-control custom-checkbox">
                     <input
@@ -175,7 +175,7 @@ class App extends Component {
                   </div>
                 </div>
               </Col>
-              <Col md={4}>
+              <Col md={6} sm={6}>
                 <div className="duration-control">
                   <div className="control-title" />
                   <Controls
