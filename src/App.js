@@ -15,7 +15,8 @@ class App extends Component {
       minutes: 25,
       focus: 25,
       break: 5,
-      timerRunning: false
+      timerRunning: false,
+      endTime: false
     };
     this.secondsRemaining;
     this.intervalHandle;
@@ -24,9 +25,30 @@ class App extends Component {
     this.lengthControl = this.lengthControl.bind(this);
     this.startFocus = this.startFocus.bind(this);
     this.tick = this.tick.bind(this);
+    this.notify = this.notify.bind(this);
   }
 
-  Notify() {
+  notify() {
+    console.log("yep 😃");
+    if (
+      document.getElementById("alarmSound").checked == true &&
+      this.state.endTime == true
+    ) {
+      console.log("audio");
+      let audio = new Audio("https://goo.gl/65cBl1");
+      audio.play();
+    }
+    if (
+      document.getElementById("notification").checked == true &&
+      this.state.endTime == true
+    ) {
+      console.log("notification");
+      new Notification("Time's up!");
+    }
+  }
+
+  askPermission() {
+    console.log("permission");
     Notification.requestPermission();
   }
 
@@ -69,22 +91,14 @@ class App extends Component {
       });
     }
 
-    if (
-      (min === 0) &
-      (sec === 0) &
-      (document.getElementById("alarmSound").checked == true)
-    ) {
-      let audio = new Audio("https://goo.gl/65cBl1");
-      audio.play();
-      clearInterval(this.intervalHandle);
-    } else if (
-      (min === 0) &
-      (sec === 0) &
-      (document.getElementById("notification").checked == true)
-    ) {
-      new Notification("Time's up!");
-      clearInterval(this.intervalHandle);
-    } else if ((min === 0) & (sec === 0)) {
+    // change endTime: true
+    if ((min === 0) & (sec === 0)) {
+      console.log("🚀");
+      this.setState({
+        endTime: true
+      });
+      this.notify();
+
       clearInterval(this.intervalHandle);
     }
 
@@ -97,7 +111,8 @@ class App extends Component {
     let time = this.state.focus;
     this.secondsRemaining = time * 60;
     this.setState({
-      timerRunning: !this.state.timerRunning
+      timerRunning: !this.state.timerRunning,
+      endTime: false
     });
   };
 
@@ -107,7 +122,8 @@ class App extends Component {
     let time = this.state.break;
     this.secondsRemaining = time * 60;
     this.setState({
-      timerRunning: !this.state.timerRunning
+      timerRunning: !this.state.timerRunning,
+      endTime: false
     });
   };
 
@@ -145,7 +161,7 @@ class App extends Component {
                       type="checkbox"
                       className="custom-control-input"
                       id="notification"
-                      onClick={this.Notify}
+                      onClick={this.askPermission}
                     />
                     <label htmlFor="notification">Notification</label>
                   </div>
