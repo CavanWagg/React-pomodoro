@@ -29,12 +29,10 @@ class App extends Component {
   }
 
   notify() {
-    console.log("yep 😃");
     if (
       document.getElementById("alarmSound").checked == true &&
       this.state.endTime == true
     ) {
-      console.log("audio");
       let audio = new Audio("https://goo.gl/65cBl1");
       audio.play();
     }
@@ -42,13 +40,11 @@ class App extends Component {
       document.getElementById("notification").checked == true &&
       this.state.endTime == true
     ) {
-      console.log("notification");
       new Notification("Time's up!");
     }
   }
 
   askPermission() {
-    console.log("permission");
     Notification.requestPermission();
   }
 
@@ -60,7 +56,6 @@ class App extends Component {
   }
 
   lengthControl(stateToChange, sign, currentLength) {
-    console.log(stateToChange, currentLength);
     if (sign === "—" && currentLength > 1) {
       this.setState({ [stateToChange]: currentLength - 1 });
     }
@@ -93,7 +88,6 @@ class App extends Component {
 
     // change endTime: true
     if ((min === 0) & (sec === 0)) {
-      console.log("🚀");
       this.setState({
         endTime: true
       });
@@ -138,12 +132,7 @@ class App extends Component {
     return (
       <div className="container-fluid" id="App">
         <div className="main">
-          <Timer minutes={this.state.minutes} seconds={this.state.seconds}>
-            {" "}
-            <span aria-label="Tomato" role="img">
-              🍅{" "}
-            </span>{" "}
-          </Timer>
+          <Timer minutes={this.state.minutes} seconds={this.state.seconds} />
           <div className="button-div text-center">
             <FocusButton startFocus={this.startFocus} />
             <BreakButton startBreak={this.startBreak} />
@@ -165,7 +154,7 @@ class App extends Component {
                     />
                     <label htmlFor="notification">Notification</label>
                   </div>
-                  <div class="custom-control custom-checkbox">
+                  <div className="custom-control custom-checkbox">
                     <input
                       type="checkbox"
                       className="custom-control-input"
@@ -196,12 +185,12 @@ class App extends Component {
               </Col>
             </Row>
             <Row className="bg-info">
-              <p class="footer-text">
+              <p className="footer-text">
                 <span role="img" aria-label="rocket">
                   🚀
                 </span>{" "}
                 Designed & Coded by
-                <a class="font-primary" href="https://github.com/CavanWagg">
+                <a className="font-primary" href="https://github.com/CavanWagg">
                   {" "}
                   Cavan Wagg{" "}
                 </a>
