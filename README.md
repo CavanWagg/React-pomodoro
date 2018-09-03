@@ -1,8 +1,11 @@
 # React Pomodoro
 
-Deployed via Netlify, Access it [here]()
+Deployed via Netlify, Access it [here](https://priceless-leakey-c384c9.netlify.com/)
 
 ![Screenshot](https://cl.ly/d0385050c417/Image%2525202018-09-01%252520at%2525203.52.56%252520PM.png)
+
+## Description 
+The Pomodoro Method is a simple productivity technique.  It starts with a 25 minute work session followed by taking a 5 min break. After four work sessions are complete the user should take a longer break. 
 
 ## Features
 
