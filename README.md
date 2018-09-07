@@ -5,7 +5,7 @@ Deployed via Netlify, Access it [here](https://priceless-leakey-c384c9.netlify.c
 ![Screenshot](https://cl.ly/d0385050c417/Image%2525202018-09-01%252520at%2525203.52.56%252520PM.png)
 
 ## Description 
-The Pomodoro Method is a simple productivity technique.  It starts with a 25 minute work session followed by taking a 5 min break. After four work sessions are complete the user should take a longer break. 
+The Pomodoro Method is a simple productivity technique involving a timer and alternating between work sessions and short break sessions. For more information see the [wikipedia page](https://en.wikipedia.org/wiki/Pomodoro_Technique).
 
 ## Features
 
@@ -29,4 +29,4 @@ cyborg theme from [bootswatch](https://www.bootstrapcdn.com/bootswatch/)
 
 1. `git clone https://github.com/CavanWagg/React-pomodoro.git`
 2. inside the repo run `npm install`
-3. run `npm start`
+3. run `npm start` to view in browser via localhost
