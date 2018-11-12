@@ -95,7 +95,7 @@ class App extends Component {
 
       clearInterval(this.intervalHandle);
     }
-
+    document.title = `${this.state.minutes}:${this.state.seconds}`;
     this.secondsRemaining--;
   };
 
